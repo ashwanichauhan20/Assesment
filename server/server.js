@@ -12,7 +12,15 @@ connectDB();
 const app = express();
 
 // middleware
-app.use(cors());
+// CORS configuration (allow your frontend)
+app.use(
+  cors({
+    origin: "https://assesment-o9my.onrender.com",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+  })
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
