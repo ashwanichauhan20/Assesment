@@ -1,0 +1,13 @@
+ Volume in drive C has no label.
+ Volume Serial Number is 50F0-BE51
+
+ Directory of c:\Users\sushi\OneDrive\Desktop\Assesment
+
+14-03-2026  09:35    <DIR>          .
+13-03-2026  21:09    <DIR>          ..
+14-03-2026  09:22                58 .gitignore
+14-03-2026  09:16    <DIR>          client
+14-03-2026  09:35                 0 dir2.txt
+13-03-2026  20:56    <DIR>          server
+               2 File(s)             58 bytes
+               4 Dir(s)  164,633,079,808 bytes free
