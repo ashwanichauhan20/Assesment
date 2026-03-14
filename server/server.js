@@ -6,51 +6,37 @@ const authRoutes = require("./routes/authRoutes");
 
 dotenv.config();
 
-// Connect MongoDB
+// connect to database
 connectDB();
 
 const app = express();
 
-// CORS configuration (allow your frontend)
-app.use(
-  cors({
-    origin: "https://assesment-o9my.onrender.com",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
-  })
-);
-
-// Middleware
+// middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Routes
+// routes
 app.use("/api/auth", authRoutes);
 
-// Home route
+// home route
 app.get("/", (req, res) => {
   res.json({
-    message: "API is running successfully 🚀"
+    message: "API running successfully 🚀"
   });
 });
 
-// Dashboard test route
+// dashboard test route
 app.get("/dashboard", (req, res) => {
   res.json({
-    message: "Dashboard API working"
+    message: "Dashboard working"
   });
 });
 
-// 404 handler
-app.use((req, res) => {
-  res.status(404).json({
-    error: "Route not found"
-  });
-});
-
-// Server port (Render uses process.env.PORT)
+// port (Render provides PORT automatically)
 const PORT = process.env.PORT || 5000;
 
+// start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
