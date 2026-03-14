@@ -1,6 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API = axios.create({ baseURL: 'http://localhost:5000/api/auth' });
+// Use import.meta.env to access Vite env variables
+const API = axios.create({
+  baseURL: `${import.meta.env.VITE_URL}/api/auth`,
+  withCredentials: true // optional, if backend uses cookies or sessions
+});
 
-export const register = (formData) => API.post('/register', formData);
-export const login = (formData) => API.post('/login', formData);
+// API functions
+export const register = (formData) => API.post("/register", formData);
+export const login = (formData) => API.post("/login", formData);
