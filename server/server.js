@@ -12,17 +12,28 @@ connectDB();
 const app = express();
 
 // middleware
-// CORS configuration (allow your frontend)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// CORS configuration
+const allowedOrigins = [
+  "http://localhost:5173", // Vite local frontend
+  "https://assesment-o9my.onrender.com" // deployed frontend
+];
+
 app.use(
   cors({
-    origin: "https://assesment-o9my.onrender.com",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS not allowed"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
   })
 );
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // routes
 app.use("/api/auth", authRoutes);
@@ -41,7 +52,12 @@ app.get("/dashboard", (req, res) => {
   });
 });
 
-// port (Render provides PORT automatically)
+// health check route (good for Render uptime check)
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "OK" });
+});
+
+// port (Render automatically provides PORT)
 const PORT = process.env.PORT || 5000;
 
 // start server
