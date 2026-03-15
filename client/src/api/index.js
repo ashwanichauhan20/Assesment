@@ -1,9 +1,11 @@
 import axios from "axios";
 
-// Use import.meta.env to access Vite env variables
+// remove trailing slash if present
+const BASE_URL = import.meta.env.VITE_URL?.replace(/\/$/, "");
+
 const API = axios.create({
-  baseURL: `${import.meta.env.VITE_URL}/api/auth`,
-  withCredentials: true // optional, if backend uses cookies or sessions
+  baseURL: `${BASE_URL}/api/auth`,
+  withCredentials: true
 });
 
 // API functions
